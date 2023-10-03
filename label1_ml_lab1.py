@@ -35,6 +35,7 @@ x_test = {}
 for label in labels:
   tr_df = train_df[train_df['label_2'].notna()] if label == 'label_2' else train_df
   vl_df = valid_df
+  tst_df = test_df
 
   scaler = StandardScaler()
   x_train[label] = pd.DataFrame(scaler.fit_transform(tr_df.drop(labels, axis = 1)), columns = features)
@@ -43,7 +44,7 @@ for label in labels:
   x_valid[label] = pd.DataFrame(scaler.transform(vl_df.drop(labels, axis = 1)), columns = features)
   y_valid[label] = vl_df[label]
 
-  x_test[label] = pd.DataFrame(scaler.transform(vl_df.drop(labels, axis = 1)), columns = features)
+  x_test[label] = pd.DataFrame(scaler.transform(tst_df.drop(labels, axis = 1)), columns = features)
 
 from sklearn import svm
 
